@@ -28,29 +28,30 @@
             int[] vrstva = new int[pocet_lidi];
             int[] predchozi = new int[pocet_lidi];
             int[] otevrenost = new int[pocet_lidi];
-            int kolo = 0;
+            int kolo = -1;
 
             fronta.Enqueue(start);
             otevrenost[start] = 1;
 
             while (fronta.Count > 0) 
             {   
-                int vrchol = fronta.Peek();
+                int vrchol = fronta.Dequeue();
                 kolo = kolo + 1;
-                for (int i = 0; i < pocet_lidi-1; i++)
+                for (int i = 0; i < pocet_lidi; i++)
                 {
                     if (graf[vrchol, i] == 1 && otevrenost[i] == 0)
                     {
                         vrstva[i] = kolo;
                         predchozi[i] = vrchol;
                         fronta.Enqueue(i);
+                        otevrenost[i] = 1;
 
 
 
                     }
                 }
-                otevrenost[vrchol] = 1;
-                fronta.Dequeue();
+                
+                
             }
             Console.WriteLine(vrstva[cil]);
 
